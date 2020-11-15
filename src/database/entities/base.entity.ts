@@ -1,6 +1,6 @@
 import { Expose, Type } from 'class-transformer';
 import { IsDate, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { BOOLEAN_NUMBER } from 'src/shared/bussiness/constant';
+import { BOOLEAN_NUMBER } from 'src/shared/business/constant';
 import {
   BeforeInsert,
   BeforeUpdate,

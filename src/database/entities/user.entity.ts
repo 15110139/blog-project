@@ -5,7 +5,7 @@ import { BaseEntity } from './base.entity';
 
 @Exclude()
 @Entity("user")
-export class User extends BaseEntity {
+export class UserEntity extends BaseEntity {
   @Expose()
   @Column()
   @IsString()
