@@ -1,9 +1,9 @@
-import { Inject, Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
 	createCipheriv,
 	createDecipheriv,
 	createHash,
-	pbkdf2,
+	pbkdf2Sync,
 	privateDecrypt,
 	publicDecrypt,
 	publicEncrypt,
@@ -121,7 +121,7 @@ export class CryptoService {
 
 	public async hashPassword(
 		pwd: string,
-		salt: Buffer | string = randomBytes(32),
+		salt: Buffer | string = randomBytes(32).toString('hex'),
 		iterations: number = 300000,
 	): Promise<{
 		hash: string;
@@ -129,22 +129,33 @@ export class CryptoService {
 		iterations: number;
 		finalPassword: string;
 	}> {
-		return new Promise((resolve, reject) => {
-			pbkdf2(pwd, salt, iterations, 48, 'sha512', (err, derivedKey) => {
-				if (err) {
-					reject(err);
-				} else {
-					const res = {
-						hash: derivedKey.toString('base64'),
-						salt: salt.toString('base64'),
-						iterations,
-					};
-					resolve({
-						...res,
-						finalPassword: `${res.hash}.${res.salt}.${iterations}`,
-					});
-				}
-			});
-		});
+		const hash = await pbkdf2Sync(
+			pwd,
+			salt,
+			iterations,
+			32,
+			'sha512',
+		).toString('hex');
+		return {
+			hash,
+			salt,
+			iterations,
+			finalPassword: [salt, hash].join('$'),
+		};
+	}
+
+	public async comparePassword(
+		password: string,
+		originalPassword: string,
+	): Promise<boolean> {
+		const originalHash = originalPassword.split('$')[1];
+		const salt = originalPassword.split('$')[0];
+
+		const hash = pbkdf2Sync(password, salt, 30000, 32, 'sha512').toString(
+			'hex',
+		);
+
+		if (hash === originalHash) return true;
+		return false;
 	}
 }
