@@ -1,4 +1,6 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { CryptoService } from 'src/core/crypto/crypto.service';
+import { UserEntity } from 'src/database/entities/user.entity';
 import { BOOLEAN_NUMBER } from 'src/shared/business/constant';
 import { SYSTEM_CODE } from 'src/shared/business/system-code';
 import { UserRepository } from './user.repository';
@@ -6,17 +8,46 @@ import { UserRepository } from './user.repository';
 @Injectable()
 export class UserService {
 	private logger = new Logger();
-	constructor(private userRepo: UserRepository) {}
+	constructor(
+		private userRepo: UserRepository,
+		private cryptoService: CryptoService,
+	) {}
 
-	public async createUser(username: string, password: string) {
-		if (this.getUserWithUserName(username)) {
+	public async createUser(username: string, password: string, name: string) {
+		if (await this.getUserWithUserName(username)) {
 			this.logger.error(`Username exist in database`);
 			throw new BadRequestException(SYSTEM_CODE.USER_NAME_EXIST_SYSTEM);
 		}
-		await this.userRepo.create({
-			username,
-			password,
-		});
+
+		const hashPassword = await this.cryptoService.hashPassword(password);
+		console.log(hashPassword);
+
+		const user = new UserEntity();
+		user.name = name;
+		user.username = username;
+		user.password = hashPassword.finalPassword;
+
+		await this.userRepo.create(user);
+	}
+
+	public async getUserWithUsernameAndPassword(
+		username: string,
+		password: string,
+	): Promise<UserEntity> {
+		const user = await this.getUserWithUserName(username);
+		if (!user) {
+			this.logger.error(`Username is not exist in database`);
+			throw new BadRequestException(
+				SYSTEM_CODE.USER_NAME_OR_PASSWORD_IS_NOT_CORRECT,
+			);
+		}
+		if (!this.cryptoService.comparePassword(password, user.password)) {
+			this.logger.error(`Password user is not correct`);
+			throw new BadRequestException(
+				SYSTEM_CODE.USER_NAME_OR_PASSWORD_IS_NOT_CORRECT,
+			);
+		}
+		return user;
 	}
 
 	public async getUser(userId: string) {

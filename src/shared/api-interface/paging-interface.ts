@@ -35,7 +35,8 @@ export class PagingRequest {
   @IsNumber()
   @Type((_type: unknown) => Number)
   @Expose()
-  public page!: number;
+  @IsOptional()
+  public page: number;
 
   @IsNumber()
   @Type((_type: unknown) => Number)

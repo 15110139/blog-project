@@ -1,8 +1,9 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { IsDefined, IsOptional, IsString } from 'class-validator';
 import { BaseApiInterface, METHOD } from '../base-api-interface';
 
-export class UpdateBlogBodyRequest {
+@Exclude()
+export class UpdateBlogOfUserBodyRequest {
   @Expose()
   @IsString()
   @IsOptional()
@@ -14,7 +15,8 @@ export class UpdateBlogBodyRequest {
   public content?: string;
 }
 
-export class UpdateBlogResponse {
+@Exclude()
+export class UpdateBlogOfUserResponse {
   @Expose()
   @IsString()
   @IsDefined()
@@ -31,6 +33,7 @@ export class UpdateBlogResponse {
   public content!: string;
 }
 
+@Exclude()
 export class UpdateBlogParams {
   @IsDefined()
   @Expose()
@@ -38,16 +41,16 @@ export class UpdateBlogParams {
   blogId!: string;
 }
 
-export class UpdateBlogApiInterface extends BaseApiInterface {
-  public readonly url = UpdateBlogApiInterface.url;
+export class UpdateBlogOfUserApiInterface extends BaseApiInterface {
+  public readonly url = UpdateBlogOfUserApiInterface.url;
   public queryDTO: undefined;
-  public bodyDTO: UpdateBlogBodyRequest;
-  public static url: string = 'blog';
+  public bodyDTO: UpdateBlogOfUserBodyRequest;
+  public static url: string = 'user/blog/:blogId';
   public readonly method = METHOD.PUT;
-  public responseDTOClass = UpdateBlogResponse;
+  public responseDTOClass = UpdateBlogOfUserResponse;
   public paramsDTO: UpdateBlogParams;
 
-  constructor(body: UpdateBlogBodyRequest, params: UpdateBlogParams) {
+  constructor(body: UpdateBlogOfUserBodyRequest, params: UpdateBlogParams) {
     super();
     this.bodyDTO = body;
     this.paramsDTO = params;

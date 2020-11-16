@@ -8,8 +8,8 @@ export class UserRepository {
 	constructor(
 		@InjectRepository(UserEntity) private repo: Repository<UserEntity>,
 	) {}
-	public async create(user: IUser) {
-		return await this.repo.create(user);
+	public async create(user: UserEntity) {
+		return await this.repo.save(user);
 	}
 	public async update(
 		condition: Partial<UserEntity>,

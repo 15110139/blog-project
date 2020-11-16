@@ -87,7 +87,7 @@ export class Environment {
 
 	@IsString()
 	@Expose()
-	public MICROSERVICES: string = "MICROSERVICES"
+	public MICROSERVICES: string = 'MICROSERVICES';
 
 	@IsString()
 	@Expose()
@@ -107,6 +107,14 @@ export class Environment {
 	@IsString()
 	@Expose()
 	public JWT_SECRET: string = 'QwaPPccjVXVTCQ9zgfxBMGU4nBRtcAjx';
+
+	@IsString()
+	@Expose()
+	public APP_BASE_URL: string = 'v1';
+
+	@IsString()
+	@Expose()
+	public ELASTICSEARCH_HOST = 'http://localhost:9200';
 }
 
 @Injectable()
