@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserTokenRequest } from 'src/core/auth/auth.payload';
-import { BlogEntity } from 'src/database/entities/blog.entity';
+import { BlogEntity } from '../../database/entities/blog.entity';
 import { ResponseApiInterface } from 'src/shared/api-interface/base-api-interface';
 import { BlogResponse } from 'src/shared/api-interface/blog-api-interface/blog.model';
 import {

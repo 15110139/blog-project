@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { CryptoService } from 'src/core/crypto/crypto.service';
 import { UserEntity } from 'src/database/entities/user.entity';
-import { BOOLEAN_NUMBER } from 'src/shared/business/constant';
+import { BOOLEAN_NUMBER } from '../../shared/business/constant';
 import { SYSTEM_CODE } from 'src/shared/business/system-code';
 import { UserRepository } from './user.repository';
 
@@ -20,7 +20,6 @@ export class UserService {
 		}
 
 		const hashPassword = await this.cryptoService.hashPassword(password);
-		console.log(hashPassword);
 
 		const user = new UserEntity();
 		user.name = name;

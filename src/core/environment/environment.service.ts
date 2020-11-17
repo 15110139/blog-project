@@ -7,7 +7,7 @@ import {
 	IsArray,
 } from 'class-validator';
 import { Injectable, Logger, ValueProvider } from '@nestjs/common';
-import { stringToList } from 'src/shared/utils/class-transformer';
+import { stringToList } from '../../shared/utils/class-transformer';
 
 export enum ENVIRONMENTS {
 	PRODUCTION = 'PRODUCTION',
@@ -87,7 +87,6 @@ export class Environment {
 @Injectable()
 export class EnvironmentService {
 	public readonly ENVIRONMENT: Environment;
-	private logger = new Logger(Environment.name);
 	constructor() {
 		this.ENVIRONMENT = plainToClass(
 			Environment,
@@ -99,10 +98,8 @@ export class EnvironmentService {
 		);
 		const res = validateSync(this.ENVIRONMENT);
 		if (res.length) {
-			this.logger.log(res);
 			throw res;
 		}
-		this.logger.log(this.ENVIRONMENT);
 	}
 }
 

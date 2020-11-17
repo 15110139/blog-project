@@ -5,11 +5,11 @@ import {
 	Logger,
 	UnauthorizedException,
 } from '@nestjs/common';
-import { ElasticsearchService } from 'src/core/elasticsearch/elasticsearch.service';
-import { BlogEntity } from 'src/database/entities/blog.entity';
-import { BOOLEAN_NUMBER } from 'src/shared/business/constant';
-import { SYSTEM_CODE } from 'src/shared/business/system-code';
-import { IBlog } from 'src/shared/dto/blog.dto';
+import { ElasticsearchService } from '../../core/elasticsearch/elasticsearch.service';
+import { BlogEntity } from '../../database/entities/blog.entity';
+import { BOOLEAN_NUMBER } from '../../shared/business/constant';
+import { SYSTEM_CODE } from '../../shared/business/system-code';
+import { IBlog } from '../../shared/dto/blog.dto';
 import { BlogRepository } from './blog.repository';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class BlogService {
 		private elasticSearchService: ElasticsearchService,
 	) {}
 
-	public async createBlog(blog: IBlog): Promise<IBlog> {
+	public async createBlog(blog: IBlog): Promise<BlogEntity> {
 		if (await this.checkTitleBlogIsExist(blog.title)) {
 			this.logger.error('Exist blog title in database');
 			throw new BadRequestException(SYSTEM_CODE.BLOG_TITLE_EXIST_SYSTEM);
@@ -45,7 +45,7 @@ export class BlogService {
 			.catch(error => {
 				this.logger.error(error);
 			});
-		return newBlog as IBlog;
+		return newBlog ;
 	}
 
 	public async getBlog(blogId: string): Promise<IBlog> {

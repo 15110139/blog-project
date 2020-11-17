@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/database/entities/user.entity';
-import { BOOLEAN_NUMBER } from 'src/shared/business/constant';
+import { BOOLEAN_NUMBER } from '../../shared/business/constant';
 import { IUser } from 'src/shared/dto/user.dto';
 import { FindManyOptions, Repository } from 'typeorm';
 

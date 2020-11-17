@@ -1,6 +1,6 @@
 import { Exclude, Expose } from 'class-transformer';
 import { IsString } from 'class-validator';
-import { IBlog } from 'src/shared/dto/blog.dto';
+import { IBlog } from '../../shared/dto/blog.dto';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { UserEntity } from './user.entity';

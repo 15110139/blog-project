@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BlogEntity } from 'src/database/entities/blog.entity';
-import { BOOLEAN_NUMBER } from 'src/shared/business/constant';
+import { BlogEntity } from '../../database/entities/blog.entity';
+import { BOOLEAN_NUMBER } from '../../shared/business/constant';
 import { FindManyOptions, Repository } from 'typeorm';
 import {
 	paginate,
