@@ -16,18 +16,16 @@ export class ElasticsearchService implements OnModuleInit {
 	public async search(
 		dataQuery: {
 			index: string;
-			type: string;
 			body: any;
 		},
 		paging: {
 			page: number;
 			pageSize: number;
 		},
-		sort: string[],
+		sort?: string[],
 	) {
 		return await this.client.search({
 			index: dataQuery.index,
-			type: dataQuery.type,
 			body: dataQuery.body,
 			from: paging.page,
 			size: paging.pageSize,

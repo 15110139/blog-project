@@ -17,6 +17,12 @@ export class GetBlogResponse {
   @IsString()
   @IsDefined()
   public content!: string;
+
+
+  @Expose()
+  @IsString()
+  @IsDefined()
+  public user_id!: string;
 }
 
 export class GetBlogParams {

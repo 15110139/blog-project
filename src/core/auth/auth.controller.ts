@@ -1,11 +1,5 @@
-import {
-	Body,
-	Controller,
-	Post,
-} from '@nestjs/common';
-import {
-	ENVIRONMENTS,
-} from '../environment/environment.service';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ENVIRONMENTS } from '../environment/environment.service';
 import { UserJWTPayload } from './auth.payload';
 import { AuthService } from './auth.service';
 import { Publishes } from './publish.decorator';
@@ -41,7 +35,7 @@ export class AuthController {
 	})
 	public async userLogin(
 		@Body() body: UserLoginBodyRequest,
-	): Promise<ResponseApiInterface<UserSignResponse>> {
+	): Promise<UserSignResponse> {
 		const user = await this.userService.getUserWithUsernameAndPassword(
 			body.username,
 			body.password,
@@ -53,13 +47,9 @@ export class AuthController {
 			user_id: user.id,
 		};
 
-		return new ResponseApiInterface(
-			{
-				token: await this.authService.signJWTToken(content),
-			},
-			'',
-			SYSTEM_CODE.SUCCESS,
-		);
+		return {
+			token: await this.authService.signJWTToken(content),
+		};
 	}
 
 	@Post(UserSignInApiInterface.url)

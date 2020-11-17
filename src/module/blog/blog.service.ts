@@ -83,14 +83,15 @@ export class BlogService {
 			throw new BadGatewayException(SYSTEM_CODE.BLOG_TITLE_EXIST_SYSTEM);
 		}
 
+		const dataUpdate = this.buildDataUpdateBlog(blogTitle, blogContent);
 		const updateResult = await this.blogRepo.update(
 			{ id: blogId },
-			this.buildDataUpdateBlog(blogTitle, blogContent),
+			dataUpdate,
 		);
 
 		this.elasticSearchService
-			.updateData({
-				data: updateResult,
+			.updateData<IBlog>({
+				data: dataUpdate,
 				index: this.indexBlogSearch,
 				id: blogId,
 			})
@@ -108,14 +109,30 @@ export class BlogService {
 		return updateResult;
 	}
 
-	public async listBlog(page: number, pageSize: number, userId?: string) {
-		return await this.blogRepo.paginate(
+	public async listBlog(
+		page: number,
+		pageSize: number,
+		userId?: string,
+	): Promise<{
+		data: BlogEntity[];
+		totalItems: number;
+		currentPage: number;
+		pageSize: number;
+	}> {
+		const result = await this.blogRepo.paginate(
 			{
 				limit: pageSize,
 				page,
 			},
 			userId,
 		);
+
+		return {
+			data: result.items,
+			totalItems: result.meta.totalItems,
+			currentPage: page,
+			pageSize: pageSize,
+		};
 	}
 
 	public async delete(blogId: string, userId: string) {
@@ -150,6 +167,47 @@ export class BlogService {
 			.catch(error => {
 				this.logger.error(error);
 			});
+	}
+
+	public async searchBlog<T>(
+		textSearch: string,
+		paging: {
+			page: number;
+			pageSize: number;
+		},
+		sort?: string[],
+	): Promise<{
+		data: T[];
+		totalItems: number;
+		currentPage: number;
+		pageSize: number;
+	}> {
+		const result = await this.elasticSearchService.search(
+			{
+				body: {
+					query: {
+						multi_match: {
+							query: textSearch,
+							fields: ['title', 'content'],
+						},
+					},
+				},
+				index: this.indexBlogSearch,
+			},
+			{
+				page: paging.page,
+				pageSize: paging.pageSize,
+			},
+			sort,
+		);
+		const listHit = result.body.hits.hits;
+		const totalItems = result.body.hits.value;
+		return {
+			data: listHit.map(el => el._source as T),
+			totalItems,
+			currentPage: paging.page,
+			pageSize: paging.pageSize,
+		};
 	}
 
 	private async checkTitleBlogIsExist(title: string): Promise<boolean> {

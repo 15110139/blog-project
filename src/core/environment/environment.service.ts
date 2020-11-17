@@ -19,24 +19,7 @@ export enum ENVIRONMENTS {
 export class Environment {
 	@Expose()
 	@IsEnum(ENVIRONMENTS)
-	public ENV_PUBLISH_API: ENVIRONMENTS = ENVIRONMENTS.PRODUCTION;
-
-	@Expose()
-	@IsString()
-	public REDIS_HOST: string = 'localhost';
-
-	@Expose()
-	@IsNumber()
-	@Type(() => Number)
-	public REDIS_PORT: number = 6379;
-
-	@Expose()
-	@IsString()
-	public REDIS_USER: string = 'admin';
-
-	@Expose()
-	@IsString()
-	public REDIS_PASSWORD: string = 'admin';
+	public ENV_PUBLISH_API: ENVIRONMENTS = ENVIRONMENTS.PRODUCTION
 
 	@Expose()
 	@IsString()
@@ -45,7 +28,7 @@ export class Environment {
 	@Expose()
 	@IsNumber()
 	@Type(() => Number)
-	public DB_PORT: number = 5002;
+	public DB_PORT: number = 5432;
 
 	@Expose()
 	@IsString()
@@ -57,23 +40,7 @@ export class Environment {
 
 	@Expose()
 	@IsString()
-	public DB_NAME: string = 'test';
-
-	@Expose()
-	@IsString()
-	public MQ_HOST: string = 'localhost';
-
-	@Expose()
-	@IsString()
-	public MQ_USER: string = 'admin';
-
-	@Expose()
-	@IsString()
-	public MQ_PASSWORD: string = 'admin';
-
-	@Expose()
-	@IsNumber()
-	public MQ_PORT: number = 5672;
+	public DB_NAME: string = 'blog-project';
 
 	@Expose()
 	@IsNumber()

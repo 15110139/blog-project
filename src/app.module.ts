@@ -6,7 +6,8 @@ import { EnvironmentModule } from './core/environment/environment.module';
 import { typeormModule } from './database/typeorm.module';
 import { BlogController } from './module/blog/blog.controller';
 import { BlogModule } from './module/blog/blog.module';
-
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ResponseInterceptor } from './core/interceptor/response.interceptor';
 @Module({
 	imports: [
 		ElasticSearchModule,
@@ -15,6 +16,12 @@ import { BlogModule } from './module/blog/blog.module';
 		typeormModule(),
 		EnvironmentModule,
 		BlogModule,
+	],
+	providers: [
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: ResponseInterceptor,
+		},
 	],
 	controllers: [BlogController],
 })
