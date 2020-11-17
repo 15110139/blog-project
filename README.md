@@ -35,7 +35,7 @@ src --- include code and module\
 ----module: have module business or common module ...\
 ----shared: type define api, business, dto, common function ...\
 ----main.ts root file to run code\
-dev-env. sh: script run default env\
+dev-env. sh: script run default env
 
 
 ## Api 
