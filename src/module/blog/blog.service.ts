@@ -178,16 +178,24 @@ export class BlogService {
 		currentPage: number;
 		pageSize: number;
 	}> {
-		const result = await this.elasticSearchService.search(
-			{
-				body: {
-					query: {
-						multi_match: {
-							query: textSearch,
-							fields: ['title', 'content'],
-						},
+		let conditionSearch: any = {
+			query: {
+				match_all: {},
+			},
+		};
+		if (textSearch) {
+			conditionSearch = {
+				query: {
+					multi_match: {
+						query: textSearch,
+						fields: ['title', 'content'],
 					},
 				},
+			};
+		}
+		const result = await this.elasticSearchService.search(
+			{
+				body: conditionSearch,
 				index: this.indexBlogSearch,
 			},
 			{
