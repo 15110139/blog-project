@@ -26,7 +26,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.\
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 ## Source structure 
 src --- include code and module\
 ----@type: defined type\
@@ -51,7 +51,7 @@ dev-env. sh: script run default env
  Delete : http://13.70.33.217/:3000/v1/user/blog/:blogId, METHOD DELETE and AUTH BEARER\
  Update : http://13.70.33.217/:3000/v1/user/blog/:blogId, METHOD PUT and AUTH BEARER
 
-+ List User Guest  : http://13.70.33.217/:3000/v1/user/blog, METHOD GET and AUTH BEARER\
++ List User Guest  : http://13.70.33.217/:3000/v1/user/blog, METHOD GET and AUTH BEARER
 + Link publish [POSTMAN](https://www.getpostman.com/collections/8a70ed4d3a87c530f07c)
 
 ## Technical
