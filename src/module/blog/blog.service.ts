@@ -45,7 +45,7 @@ export class BlogService {
 			.catch(error => {
 				this.logger.error(error);
 			});
-		return newBlog ;
+		return newBlog;
 	}
 
 	public async getBlog(blogId: string): Promise<IBlog> {
@@ -90,7 +90,7 @@ export class BlogService {
 		);
 
 		this.elasticSearchService
-			.updateData<IBlog>({
+			.updateData({
 				data: dataUpdate,
 				index: this.indexBlogSearch,
 				id: blogId,
@@ -152,11 +152,7 @@ export class BlogService {
 		});
 
 		this.elasticSearchService
-			.deleteData<BlogEntity>({
-				data: blog,
-				id: blogId,
-				index: this.indexBlogSearch,
-			})
+			.deleteData(this.indexBlogSearch, blogId)
 			.then(result => {
 				this.logger.log(
 					`Result delete data elasticsearch: ${JSON.stringify(

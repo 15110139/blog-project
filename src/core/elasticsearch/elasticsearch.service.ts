@@ -33,25 +33,30 @@ export class ElasticsearchService implements OnModuleInit {
 		});
 	}
 
-	public async createData<T>(data: T, index: string) {
+	public async createData(data: any, index: string) {
 		return await this.client.index({
 			index,
+			id: data.id,
 			body: data,
 		});
 	}
 
-	public async updateData<T>(input: { data: T; index: string; id: string }) {
+	public async updateData(input: { data: any; index: string; id: string }) {
 		return await this.client.update({
-			body: input.data,
+			body: {
+				doc: {
+					...input.data,
+				},
+			},
 			id: input.id,
 			index: input.index,
 		});
 	}
 
-	public async deleteData<T>(input: { data: T; index: string; id: string }) {
+	public async deleteData(index: string, id: string) {
 		return await this.client.delete({
-			id: input.id,
-			index: input.index,
+			id,
+			index,
 		});
 	}
 }
