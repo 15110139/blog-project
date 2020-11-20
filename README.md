@@ -40,18 +40,18 @@ dev-env. sh: script run default env
 
 ## Api 
 + Authentication\
- Sign In: http://http://13.70.33.217/:3000/v1/sign-in,METHOD POST\
- Login  : http://http://13.70.33.217/:3000/v1/sign-in,METHOD POST
+ Sign In: http://13.70.33.217/:3000/v1/sign-in,METHOD POST\
+ Login  : http://13.70.33.217/:3000/v1/sign-in,METHOD POST
  
 + Feature Blog\
- Search : http://http://13.70.33.217/:3000/v1/search, METHOD GET\
- Get    : http://http://13.70.33.217/:3000/v1/blog/:blogId, METHOD GET\
- List   : http://http://13.70.33.217/:3000/v1/user/blog, METHOD GET and AUTH BEARER\
- Create : http://http://13.70.33.217/:3000/v1/user/blog, METHOD POST and AUTH BEARER\
- Delete : http://http://13.70.33.217/:3000/v1/user/blog/:blogId, METHOD DELETE and AUTH BEARER\
- Update : http://http://13.70.33.217/:3000/v1/user/blog/:blogId, METHOD PUT and AUTH BEARER
+ Search : http://13.70.33.217/:3000/v1/search, METHOD GET\
+ Get    : http://13.70.33.217/:3000/v1/blog/:blogId, METHOD GET\
+ List   : http://13.70.33.217/:3000/v1/user/blog, METHOD GET and AUTH BEARER\
+ Create : http://13.70.33.217/:3000/v1/user/blog, METHOD POST and AUTH BEARER\
+ Delete : http://13.70.33.217/:3000/v1/user/blog/:blogId, METHOD DELETE and AUTH BEARER\
+ Update : http://13.70.33.217/:3000/v1/user/blog/:blogId, METHOD PUT and AUTH BEARER
 
-+ List User Guest  : http://http://13.70.33.217/:3000/v1/user/blog, METHOD GET and AUTH BEARER\
++ List User Guest  : http://13.70.33.217/:3000/v1/user/blog, METHOD GET and AUTH BEARER\
 + Link publish [POSTMAN](https://www.getpostman.com/collections/8a70ed4d3a87c530f07c)
 
 ## Technical
