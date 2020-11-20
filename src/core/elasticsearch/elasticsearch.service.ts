@@ -27,7 +27,7 @@ export class ElasticsearchService implements OnModuleInit {
 		return await this.client.search({
 			index: dataQuery.index,
 			body: dataQuery.body,
-			from: paging.page,
+			from: (paging.page - 1) * paging.pageSize,
 			size: paging.pageSize,
 			sort,
 		});
