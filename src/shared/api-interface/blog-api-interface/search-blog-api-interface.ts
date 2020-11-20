@@ -14,7 +14,7 @@ export class SearchBlogQueryRequest extends PagingRequest {
 	@IsOptional()
 	public sort?: string[];
 
-	constructor(page?: number, pageSize?: number) {
+	constructor(page: number = 1, pageSize: number = 10) {
 		super(page, pageSize);
 	}
 }

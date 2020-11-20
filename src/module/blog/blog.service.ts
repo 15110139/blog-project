@@ -110,8 +110,8 @@ export class BlogService {
 	}
 
 	public async listBlog(
-		page: number,
-		pageSize: number,
+		page: number = 1,
+		pageSize: number = 10,
 		userId?: string,
 	): Promise<{
 		data: BlogEntity[];

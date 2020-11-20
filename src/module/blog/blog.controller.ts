@@ -55,8 +55,8 @@ export class BlogController {
 		const result = await this.blogService.searchBlog<BlogEntity>(
 			query.textSearch,
 			{
-				page: query.page,
-				pageSize: query.pageSize,
+				page: query.page || 1,
+				pageSize: query.pageSize || 10,
 			},
 			query.sort,
 		);

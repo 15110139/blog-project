@@ -19,7 +19,7 @@ export class ElasticsearchService implements OnModuleInit {
 			body: any;
 		},
 		paging: {
-			page: number;
+			page: number ,
 			pageSize: number;
 		},
 		sort?: string[],
