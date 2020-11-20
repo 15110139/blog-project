@@ -31,7 +31,7 @@ module.exports = [
 		password: decryptAES(
 			Buffer.from(process.env.DB_PASSWORD, 'base64'),
 			DB_KEY,
-		).toString('utf8'),
+		).toString('base64'),
 		database: process.env.DB_NAME,
 		synchronize: false,
 		dropSchema: false,

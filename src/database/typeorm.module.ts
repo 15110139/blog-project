@@ -22,7 +22,7 @@ export const typeormModule = () =>
         password: decryptAES(
           Buffer.from(env.ENVIRONMENT.DB_PASSWORD, 'base64'),
           DB_KEY,
-        ).toString('utf8'),
+        ).toString('base64'),
         entities: [__dirname + '/entities/*.entity{.ts,.js}'],
         keepConnectionAlive: true,
         extra: {
