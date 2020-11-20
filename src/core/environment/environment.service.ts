@@ -40,7 +40,7 @@ export class Environment {
 
 	@Expose()
 	@IsString()
-	public DB_NAME: string = 'blog-project';
+	public DB_NAME: string = 'blog_project';
 
 	@Expose()
 	@IsNumber()
