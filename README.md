@@ -40,18 +40,18 @@ dev-env. sh: script run default env
 
 ## Api 
 + Authentication\
- Sign In: http://localhost:3000/v1/sign-in,METHOD POST\
- Login  : http://localhost:3000/v1/sign-in,METHOD POST
+ Sign In: http://http://13.70.33.217/:3000/v1/sign-in,METHOD POST\
+ Login  : http://http://13.70.33.217/:3000/v1/sign-in,METHOD POST
  
 + Feature Blog\
- Search : http://localhost:3000/v1/search, METHOD GET\
- Get    : http://localhost:3000/v1/blog/:blogId, METHOD GET\
- List   : http://localhost:3000/v1/user/blog, METHOD GET and AUTH BEARER\
- Create : http://localhost:3000/v1/user/blog, METHOD POST and AUTH BEARER\
- Delete : http://localhost:3000/v1/user/blog/:blogId, METHOD DELETE and AUTH BEARER\
- Update : http://localhost:3000/v1/user/blog/:blogId, METHOD PUT and AUTH BEARER
+ Search : http://http://13.70.33.217/:3000/v1/search, METHOD GET\
+ Get    : http://http://13.70.33.217/:3000/v1/blog/:blogId, METHOD GET\
+ List   : http://http://13.70.33.217/:3000/v1/user/blog, METHOD GET and AUTH BEARER\
+ Create : http://http://13.70.33.217/:3000/v1/user/blog, METHOD POST and AUTH BEARER\
+ Delete : http://http://13.70.33.217/:3000/v1/user/blog/:blogId, METHOD DELETE and AUTH BEARER\
+ Update : http://http://13.70.33.217/:3000/v1/user/blog/:blogId, METHOD PUT and AUTH BEARER
 
-+ List User Guest  : http://localhost:3000/v1/user/blog, METHOD GET and AUTH BEARER
++ List User Guest  : http://http://13.70.33.217/:3000/v1/user/blog, METHOD GET and AUTH BEARER
 
 ## Technical
  + Nodejs
