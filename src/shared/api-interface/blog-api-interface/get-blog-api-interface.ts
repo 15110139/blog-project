@@ -36,7 +36,7 @@ export class GetBlogApiInterface extends BaseApiInterface {
   public readonly url = GetBlogApiInterface.url;
   public queryDTO: undefined;
   public bodyDTO: undefined;
-  public static url: string = 'blog';
+  public static url: string = 'blog/:blogId';
   public readonly method = METHOD.PUT;
   public responseDTOClass = GetBlogResponse;
   public paramsDTO: GetBlogParams;
